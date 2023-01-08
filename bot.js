@@ -1,7 +1,7 @@
 require("dotenv").config();
 const { Telegraf } = require("telegraf");
 const postgres = require("./db/postgres");
-const moment = require("moment")
+const moment = require("moment");
 
 const bot = new Telegraf(process.env.TOKEN);
 bot.start(async (ctx) => {
@@ -46,8 +46,9 @@ bot.command("stat", async (ctx) => {
 
   let all = await users.count();
 
-
-  ctx.reply(`Kunlik: ${day}\nHaftalik: ${week}\nOylik: ${month}\n\nUmumiy: ${all}`)
+  ctx.reply(
+    `Kunlik: ${day}\nHaftalik: ${week}\nOylik: ${month}\n\nUmumiy: ${all}`
+  );
 });
 
 bot.on("text", async (ctx) => {
@@ -64,7 +65,7 @@ bot.on("text", async (ctx) => {
       if (result.results_number > 1) {
         let inputMedia = [];
         for (let l of result.url_list) {
-          inputMedia.push({ type: "photo", media: l });
+          inputMedia.push({ type: "photo", media: l, caption: "@instauploadprobot orqali yuklab olindi" });
         }
 
         let response = await ctx.replyWithMediaGroup(inputMedia);
@@ -80,22 +81,32 @@ bot.on("text", async (ctx) => {
           link: ctx.message.text,
         });
       } else {
-        let response = await ctx.replyWithVideo(result.url_list[0]);
+        let response = await ctx.replyWithVideo(result.url_list[0], {
+          caption: "@instauploadprobot orqali yuklab olindi",
+        });
         await media.create({
           link: ctx.message.text,
-          file_id: [response.video?.file_id || response.document?.file_id]
+          file_id: [response.video?.file_id || response.document?.file_id],
         });
       }
     } else {
       if (file.results_number > 1) {
         let inputMedia = [];
         for (let l of file.file_id) {
-          inputMedia.push({ type: "photo", media: l });
-        } 
+          inputMedia.push({
+            type: "photo",
+            media: l,
+            caption: "@instauploadprobot orqali yuklab olindi",
+          });
+        }
 
-        await ctx.replyWithMediaGroup(inputMedia);
+        await ctx.replyWithMediaGroup(inputMedia, {
+          caption: "@instauploadprobot orqali yuklab olindi",
+        });
       } else {
-        await ctx.replyWithVideo(file.file_id[0]);
+        await ctx.replyWithVideo(file.file_id[0], {
+          caption: "@instauploadprobot orqali yuklab olindi",
+        });
       }
     }
   } catch (e) {
