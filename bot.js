@@ -83,7 +83,7 @@ bot.on("text", async (ctx) => {
         let response = await ctx.replyWithVideo(result.url_list[0]);
         await media.create({
           link: ctx.message.text,
-          file_id: [response.video.file_id],
+          file_id: [response.video?.file_id || response.document?.file_id]
         });
       }
     } else {
@@ -91,11 +91,11 @@ bot.on("text", async (ctx) => {
         let inputMedia = [];
         for (let l of file.file_id) {
           inputMedia.push({ type: "photo", media: l });
-        }
+        } 
 
         await ctx.replyWithMediaGroup(inputMedia);
       } else {
-        await ctx.replyWithVideo(file_id[0]);
+        await ctx.replyWithVideo(file.file_id[0]);
       }
     }
   } catch (e) {
