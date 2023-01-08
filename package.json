@@ -1,0 +1,31 @@
+{
+  "name": "instabot",
+  "version": "1.0.0",
+  "description": "\"# InstaBot\"",
+  "main": "bot.js",
+  "scripts": {
+    "start": "node bot.js",
+    "dev": "nodemon bot.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OgabekMengn1yozov/InstaBot.git"
+  },
+  "keywords": [],
+  "author": "Ogaw",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/OgabekMengn1yozov/InstaBot/issues"
+  },
+  "homepage": "https://github.com/OgabekMengn1yozov/InstaBot#readme",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "instagram-url-direct": "^1.0.13",
+    "JSON": "^1.0.0",
+    "moment": "^2.29.4",
+    "nodemon": "^2.0.20",
+    "pg": "^8.8.0",
+    "sequelize": "^6.21.6",
+    "telegraf": "^4.11.2"
+  }
+}
